@@ -124,20 +124,14 @@ const board = [
   ]
 ];
 
-let Rover = {
-  direction: "N"
+const Rover = {
+  x: 0,
+  y: 0,
+  direction: "N",
+  travelLog: [{ x: 0, y: 0 }]
 };
 
-// function createboard(num){
-//     for (let index = 0; index < num; index++) {
-//         for (let i = 0; index < num; i++) {
-//             const board = [];
-
-//         }
-
-//     }
-// }
-
+console.log(`The new position is x:${Rover.x} and y:${Rover.y}`);
 
 
 // ======================
@@ -152,8 +146,8 @@ function turnLeft(rover) {
   } else {
     rover.direction = "N";
   }
-  console.log(Rover.direction);
-  console.log("turnLeft was called!");
+  // console.log(Rover.direction);
+  // console.log("turnLeft was called!");
 }
 
 function turnRight(rover) {
@@ -171,18 +165,68 @@ function turnRight(rover) {
       rover.direction = "N";
       break;
   }
-  console.log(Rover.direction);
-  console.log("turnRight was called!");
+  // console.log(Rover.direction);
+  // console.log("turnRight was called!");
 }
 
-// function moveForward(rover) {
-//   console.log("moveForward was called");
-// }
+function moveForward(rover) {
+  let newPosition = { x: rover.x, y: rover.y };
+  switch (rover.direction) {
+    case "N":
+      rover.y--;
+      newPosition = { x: rover.x, y: rover.y };
+      rover.travelLog.push(newPosition);
+      // console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+      break;
+    case "E":
+      rover.x++;
+      newPosition = { x: rover.x, y: rover.y };
+      rover.travelLog.push(newPosition);
+      // console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+      break;
+    case "S":
+      rover.y++;
+      newPosition = { x: rover.x, y: rover.y };
+      rover.travelLog.push(newPosition);
+      // console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+      break;
+    case "W":
+      rover.x--;
+      newPosition = { x: rover.x, y: rover.y };
+      rover.travelLog.push(newPosition);
+      // console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+      break;
+  }
+  // console.log("moveForward was called");
+}
 
 
-turnLeft(Rover);
-turnLeft(Rover);
-turnLeft(Rover);
-turnRight(Rover);
-turnRight(Rover);
-turnRight(Rover);
+// Keeping the path of our rover.
+for (let i = 0; i < Rover.travelLog.length; i++) {
+  console.log(`Hola Mundo`);
+  console.log(`Path ${i} ==> x=${Rover.travelLog[i].x}, y=${Rover.travelLog[i].y}`);
+}
+
+function command(rover, orders) {
+  //recorrido lo que sera el array de ordenes
+  for (let index = 0; index < orders.length; index++) {
+    let order = orders[index];
+    switch (order) {
+      case "L":
+        turnLeft(rover);
+        break;
+      case "R":
+        turnRight(rover);
+        break;
+      case "F":
+        moveForward(rover);
+        break;
+    }
+  }
+  console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+  console.log(rover.travelLog);
+}
+
+
+
+command(Rover, "RFFRFFLFRFF");

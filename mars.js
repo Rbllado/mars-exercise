@@ -133,7 +133,6 @@ const Rover = {
 
 console.log(`The new position is x:${Rover.x} and y:${Rover.y}`);
 
-
 // ======================
 // two differents ways to do the algoritm. For example to turnLeft I have used if-else. For turnRight I have used cases. The last one is easier and more confortable.
 function turnLeft(rover) {
@@ -169,42 +168,97 @@ function turnRight(rover) {
   // console.log("turnRight was called!");
 }
 
+// Function to move next position the rover.
 function moveForward(rover) {
   let newPosition = { x: rover.x, y: rover.y };
   switch (rover.direction) {
     case "N":
-      rover.y--;
-      newPosition = { x: rover.x, y: rover.y };
-      rover.travelLog.push(newPosition);
-      // console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+      if (rover.y > 0 && rover.y <= 10) {
+        rover.y--;
+        newPosition = { x: rover.x, y: rover.y };
+        rover.travelLog.push(newPosition);
+      } else {
+        console.log("You can't place player outside of the board!");
+      }
       break;
     case "E":
-      rover.x++;
-      newPosition = { x: rover.x, y: rover.y };
-      rover.travelLog.push(newPosition);
-      // console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+      if (rover.x >= 0 && rover.x < 10) {
+        rover.x++;
+        newPosition = { x: rover.x, y: rover.y };
+        rover.travelLog.push(newPosition);
+      } else {
+        console.log("You can't place player outside of the board!");
+      }
       break;
     case "S":
-      rover.y++;
-      newPosition = { x: rover.x, y: rover.y };
-      rover.travelLog.push(newPosition);
-      // console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+      if (rover.y >= 0 && rover.y < 10) {
+        rover.y++;
+        newPosition = { x: rover.x, y: rover.y };
+        rover.travelLog.push(newPosition);
+      } else {
+        console.log("You can't place player outside of the board!");
+      }
       break;
     case "W":
-      rover.x--;
-      newPosition = { x: rover.x, y: rover.y };
-      rover.travelLog.push(newPosition);
-      // console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+      if (rover.x > 0 && rover.x <= 10) {
+        rover.x--;
+        newPosition = { x: rover.x, y: rover.y };
+        rover.travelLog.push(newPosition);
+      } else {
+        console.log("You can't place player outside of the board!");
+      }
       break;
   }
-  // console.log("moveForward was called");
 }
 
+function moveBackward(rover) {
+  let newPosition = { x: rover.x, y: rover.y };
+  switch (rover.direction) {
+    case "N":
+      if (rover.y >= 0 && rover.y < 10) {
+        rover.y++;
+        newPosition = { x: rover.x, y: rover.y };
+        rover.travelLog.push(newPosition);
+      } else {
+        console.log("You can't place player outside of the board!");
+      }
+      break;
+    case "E":
+      if (rover.x > 0 && rover.x <= 10) {
+        rover.x--;
+        newPosition = { x: rover.x, y: rover.y };
+        rover.travelLog.push(newPosition);
+      } else {
+        console.log("You can't place player outside of the board!");
+      }
+      break;
+    case "S":
+      if (rover.y > 0 && rover.y <= 10) {
+        rover.y--;
+        newPosition = { x: rover.x, y: rover.y };
+        rover.travelLog.push(newPosition);
+      } else {
+        console.log("You can't place player outside of the board!");
+      }
+      break;
+    case "W":
+      if (rover.x >= 0 && rover.x < 10) {
+        rover.x++;
+        newPosition = { x: rover.x, y: rover.y };
+        rover.travelLog.push(newPosition);
+      } else {
+        console.log("You can't place player outside of the board!");
+      }
+      break;
+  }
+}
 
 // Keeping the path of our rover.
 for (let i = 0; i < Rover.travelLog.length; i++) {
   console.log(`Hola Mundo`);
-  console.log(`Path ${i} ==> x=${Rover.travelLog[i].x}, y=${Rover.travelLog[i].y}`);
+  console.log(
+    `Path ${i} ==> x=${Rover.travelLog[i].x}, y=${Rover.travelLog[i].y}`
+  );
 }
 
 function command(rover, orders) {
@@ -221,12 +275,14 @@ function command(rover, orders) {
       case "F":
         moveForward(rover);
         break;
+      case "B":
+        moveBackward(rover);
+        break;
     }
   }
   console.log(`The new position is x:${rover.x} and y:${rover.y}`);
   console.log(rover.travelLog);
 }
 
-
-
-command(Rover, "RFFRFFLFRFF");
+// command(Rover, "RFFRFFLFRFFB");
+command(Rover, "BBBBBLBBB");

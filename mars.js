@@ -164,8 +164,6 @@ function turnRight(rover) {
       rover.direction = "N";
       break;
   }
-  // console.log(Rover.direction);
-  // console.log("turnRight was called!");
 }
 
 // Function to move next position the rover.
@@ -278,6 +276,9 @@ function command(rover, orders) {
       case "B":
         moveBackward(rover);
         break;
+      //DEFAULT IS FOR ALL THE CASES THAT ARE NOT IN THE UP CASES
+      default:
+        console.log("The letter: "+ order+" is not a command.")
     }
   }
   console.log(`The new position is x:${rover.x} and y:${rover.y}`);
@@ -285,4 +286,4 @@ function command(rover, orders) {
 }
 
 // command(Rover, "RFFRFFLFRFFB");
-command(Rover, "BBBBBLBBB");
+command(Rover, "CBBBBBLBBB");

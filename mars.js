@@ -126,10 +126,19 @@ const board = [
 
 //Rover 1 with first position x:0 adn y:0
 const rover1 = {
+  name: "Rover 1",
   x: 0,
   y: 0,
   direction: "N",
   travelLog: [{ x: 0, y: 0 }]
+};
+
+const rover2 = {
+  name: "Rover 2",
+  x: 9,
+  y: 9,
+  direction: "N",
+  travelLog: [{ x: 9, y: 9 }]
 };
 
 //The obstacle is by default the position x: 2 and y:2.
@@ -138,10 +147,18 @@ const obstacle = {
   y: 2
 };
 
-console.log(`The new position is x:${rover1.x} and y:${rover1.y}`);
+console.log(
+  `The new position for ${rover1.name} is x:${rover1.x} and y:${rover1.y}`
+);
+console.log(
+  `The new position for ${rover2.name} is x:${rover2.x} and y:${rover2.y}`
+);
+console.log(
+  `The obstacle is in the position x: ${obstacle.x} and y: ${obstacle.y}`
+);
 
 // ======================
-// two differents ways to do the algoritm. For example to turnLeft I have used if-else. For turnRight I have used cases. The last one is easier and more confortable.
+// two differents ways to do the algoritm. For example to turnLeft I have used if-else. For turnRight I have used cases(switch). The last one is easier and more confortable.
 function turnLeft(rover) {
   if (rover.direction === "N") {
     rover.direction = "W";
@@ -347,12 +364,11 @@ function moveBackward(rover) {
 }
 
 // Keeping the path of our rover1.
-for (let i = 0; i < rover1.travelLog.length; i++) {
-  console.log(`Hola Mundo`);
-  console.log(
-    `Path ${i} ==> x=${rover1.travelLog[i].x}, y=${rover1.travelLog[i].y}`
-  );
-}
+// for (let i = 0; i < rover1.travelLog.length; i++) {
+//   console.log(
+//     `Path rover 1 ${i} ==> x=${rover1.travelLog[i].x}, y=${rover1.travelLog[i].y}`
+//   );
+// }
 
 function command(rover, orders) {
   for (let index = 0; index < orders.length; index++) {
@@ -365,20 +381,41 @@ function command(rover, orders) {
         turnRight(rover);
         break;
       case "F":
+        
         moveForward(rover);
+        checkRover(rover1, rover2);
         break;
       case "B":
+        
         moveBackward(rover);
+        checkRover(rover1, rover2);
         break;
       //DEFAULT IS FOR ALL THE CASES THAT ARE NOT IN THE UP CASES
       default:
         console.log("The letter: " + order + " is not a command.");
     }
   }
-  console.log(`The new position is x:${rover.x} and y:${rover.y}`);
+  console.log(
+    `The new position for ${rover.name} is x:${rover.x} and y:${rover.y}`
+  );
   console.log(rover.travelLog);
 }
 
-command(rover1, "RFFRFFLFRFFB");
-// command(Rover, "RFFRFF");
-// command(Rover, "BBLBB");
+// Check again, now is repeating each time after forward and backword.
+function checkRover(rover1, rover2) {
+  for (let i = 0; i < rover1.travelLog.length; i++) {
+    for (let j = 0; j < rover2.travelLog.length; j++) {
+      if (
+        rover1.travelLog[i].x === rover2.travelLog[j].x &&
+        rover1.travelLog[i].y === rover2.travelLog[j].y
+      ) {
+        console.log("Rovers are in same position");
+      }
+    }
+  }
+}
+
+// command(rover1, "RFFRFFLFRFFB");
+checkRover(rover1, rover2);
+command(rover1, "RFFFFFFFFFRFFB");
+command(rover2, "FFFFFFFF");

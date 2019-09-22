@@ -124,14 +124,21 @@ const board = [
   ]
 ];
 
-const Rover = {
+//Rover 1 with first position x:0 adn y:0
+const rover1 = {
   x: 0,
   y: 0,
   direction: "N",
   travelLog: [{ x: 0, y: 0 }]
 };
 
-console.log(`The new position is x:${Rover.x} and y:${Rover.y}`);
+//The obstacle is by default the position x: 2 and y:2.
+const obstacle = {
+  x: 2,
+  y: 2
+};
+
+console.log(`The new position is x:${rover1.x} and y:${rover1.y}`);
 
 // ======================
 // two differents ways to do the algoritm. For example to turnLeft I have used if-else. For turnRight I have used cases. The last one is easier and more confortable.
@@ -173,8 +180,19 @@ function moveForward(rover) {
     case "N":
       if (rover.y > 0 && rover.y <= 10) {
         rover.y--;
-        newPosition = { x: rover.x, y: rover.y };
-        rover.travelLog.push(newPosition);
+        // Check if there is a obstacle into next movement.
+        if (rover.y === obstacle.y && rover.x === obstacle.x) {
+          console.log(
+            "There is an object in the next step : x:" +
+              rover.x +
+              " y: " +
+              rover.y
+          );
+          rover.y++;
+        } else {
+          newPosition = { x: rover.x, y: rover.y };
+          rover.travelLog.push(newPosition);
+        }
       } else {
         console.log("You can't place player outside of the board!");
       }
@@ -182,8 +200,19 @@ function moveForward(rover) {
     case "E":
       if (rover.x >= 0 && rover.x < 10) {
         rover.x++;
-        newPosition = { x: rover.x, y: rover.y };
-        rover.travelLog.push(newPosition);
+        // Check if there is a obstacle into next movement.
+        if (rover.y === obstacle.y && rover.x === obstacle.x) {
+          console.log(
+            "There is an object in the next step : x:" +
+              rover.x +
+              " y: " +
+              rover.y
+          );
+          rover.x--;
+        } else {
+          newPosition = { x: rover.x, y: rover.y };
+          rover.travelLog.push(newPosition);
+        }
       } else {
         console.log("You can't place player outside of the board!");
       }
@@ -191,8 +220,19 @@ function moveForward(rover) {
     case "S":
       if (rover.y >= 0 && rover.y < 10) {
         rover.y++;
-        newPosition = { x: rover.x, y: rover.y };
-        rover.travelLog.push(newPosition);
+        // Check if there is a obstacle into next movement.
+        if (rover.y === obstacle.y && rover.x === obstacle.x) {
+          console.log(
+            "There is an object in the next step : x:" +
+              rover.x +
+              " y: " +
+              rover.y
+          );
+          rover.y--;
+        } else {
+          newPosition = { x: rover.x, y: rover.y };
+          rover.travelLog.push(newPosition);
+        }
       } else {
         console.log("You can't place player outside of the board!");
       }
@@ -200,8 +240,19 @@ function moveForward(rover) {
     case "W":
       if (rover.x > 0 && rover.x <= 10) {
         rover.x--;
-        newPosition = { x: rover.x, y: rover.y };
-        rover.travelLog.push(newPosition);
+        // Check if there is a obstacle into next movement.
+        if (rover.y === obstacle.y && rover.x-- === obstacle.x) {
+          console.log(
+            "There is an object in the next step : x:" +
+              rover.x +
+              " y: " +
+              rover.y
+          );
+          rover.x++;
+        } else {
+          newPosition = { x: rover.x, y: rover.y };
+          rover.travelLog.push(newPosition);
+        }
       } else {
         console.log("You can't place player outside of the board!");
       }
@@ -215,8 +266,19 @@ function moveBackward(rover) {
     case "N":
       if (rover.y >= 0 && rover.y < 10) {
         rover.y++;
-        newPosition = { x: rover.x, y: rover.y };
-        rover.travelLog.push(newPosition);
+        // Check if there is a obstacle into next movement.
+        if (rover.y === obstacle.y && rover.x === obstacle.x) {
+          console.log(
+            "There is an object in the next step : x:" +
+              rover.x +
+              " y: " +
+              rover.y
+          );
+          rover.y--;
+        } else {
+          newPosition = { x: rover.x, y: rover.y };
+          rover.travelLog.push(newPosition);
+        }
       } else {
         console.log("You can't place player outside of the board!");
       }
@@ -224,8 +286,19 @@ function moveBackward(rover) {
     case "E":
       if (rover.x > 0 && rover.x <= 10) {
         rover.x--;
-        newPosition = { x: rover.x, y: rover.y };
-        rover.travelLog.push(newPosition);
+        // Check if there is a obstacle into next movement.
+        if (rover.y === obstacle.y && rover.x === obstacle.x) {
+          console.log(
+            "There is an object in the next step : x:" +
+              rover.x +
+              " y: " +
+              rover.y
+          );
+          rover.x++;
+        } else {
+          newPosition = { x: rover.x, y: rover.y };
+          rover.travelLog.push(newPosition);
+        }
       } else {
         console.log("You can't place player outside of the board!");
       }
@@ -233,8 +306,19 @@ function moveBackward(rover) {
     case "S":
       if (rover.y > 0 && rover.y <= 10) {
         rover.y--;
-        newPosition = { x: rover.x, y: rover.y };
-        rover.travelLog.push(newPosition);
+        // Check if there is a obstacle into next movement.
+        if (rover.y === obstacle.y && rover.x === obstacle.x) {
+          console.log(
+            "There is an object in the next step : x:" +
+              rover.x +
+              " y: " +
+              rover.y
+          );
+          rover.y++;
+        } else {
+          newPosition = { x: rover.x, y: rover.y };
+          rover.travelLog.push(newPosition);
+        }
       } else {
         console.log("You can't place player outside of the board!");
       }
@@ -242,8 +326,19 @@ function moveBackward(rover) {
     case "W":
       if (rover.x >= 0 && rover.x < 10) {
         rover.x++;
-        newPosition = { x: rover.x, y: rover.y };
-        rover.travelLog.push(newPosition);
+        // Check if there is a obstacle into next movement.
+        if (rover.y === obstacle.y && rover.x === obstacle.x) {
+          console.log(
+            "There is an object in the next step : x:" +
+              rover.x +
+              " y: " +
+              rover.y
+          );
+          rover.x--;
+        } else {
+          newPosition = { x: rover.x, y: rover.y };
+          rover.travelLog.push(newPosition);
+        }
       } else {
         console.log("You can't place player outside of the board!");
       }
@@ -251,16 +346,15 @@ function moveBackward(rover) {
   }
 }
 
-// Keeping the path of our rover.
-for (let i = 0; i < Rover.travelLog.length; i++) {
+// Keeping the path of our rover1.
+for (let i = 0; i < rover1.travelLog.length; i++) {
   console.log(`Hola Mundo`);
   console.log(
-    `Path ${i} ==> x=${Rover.travelLog[i].x}, y=${Rover.travelLog[i].y}`
+    `Path ${i} ==> x=${rover1.travelLog[i].x}, y=${rover1.travelLog[i].y}`
   );
 }
 
 function command(rover, orders) {
-  //recorrido lo que sera el array de ordenes
   for (let index = 0; index < orders.length; index++) {
     let order = orders[index];
     switch (order) {
@@ -278,12 +372,13 @@ function command(rover, orders) {
         break;
       //DEFAULT IS FOR ALL THE CASES THAT ARE NOT IN THE UP CASES
       default:
-        console.log("The letter: "+ order+" is not a command.")
+        console.log("The letter: " + order + " is not a command.");
     }
   }
   console.log(`The new position is x:${rover.x} and y:${rover.y}`);
   console.log(rover.travelLog);
 }
 
-// command(Rover, "RFFRFFLFRFFB");
-command(Rover, "CBBBBBLBBB");
+command(rover1, "RFFRFFLFRFFB");
+// command(Rover, "RFFRFF");
+// command(Rover, "BBLBB");

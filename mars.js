@@ -124,7 +124,7 @@ const board = [
   ]
 ];
 
-//Rover 1 with first position x:0 adn y:0
+//Rover 1 with first position by default x:0 and y:0
 const rover1 = {
   name: "Rover 1",
   x: 0,
@@ -133,6 +133,7 @@ const rover1 = {
   travelLog: [{ x: 0, y: 0 }]
 };
 
+//Rover 2 with first position by default x:9 and y:9
 const rover2 = {
   name: "Rover 2",
   x: 9,
@@ -197,7 +198,7 @@ function moveForward(rover) {
     case "N":
       if (rover.y > 0 && rover.y <= 10) {
         rover.y--;
-        // Check if there is a obstacle into next movement.
+        // Check if there any obstacle into next movement.
         if (rover.y === obstacle.y && rover.x === obstacle.x) {
           console.log(
             "There is an object in the next step : x:" +
@@ -363,13 +364,6 @@ function moveBackward(rover) {
   }
 }
 
-// Keeping the path of our rover1.
-// for (let i = 0; i < rover1.travelLog.length; i++) {
-//   console.log(
-//     `Path rover 1 ${i} ==> x=${rover1.travelLog[i].x}, y=${rover1.travelLog[i].y}`
-//   );
-// }
-
 function command(rover, orders) {
   for (let index = 0; index < orders.length; index++) {
     let order = orders[index];
@@ -381,12 +375,10 @@ function command(rover, orders) {
         turnRight(rover);
         break;
       case "F":
-        
         moveForward(rover);
         checkRover(rover1, rover2);
         break;
       case "B":
-        
         moveBackward(rover);
         checkRover(rover1, rover2);
         break;

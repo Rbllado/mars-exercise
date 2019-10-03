@@ -1,2 +1,4 @@
-The rover exercise is working until the Bonus 4 --> second points(Rover check).
+The rover exercise is working until the Bonus 4 --> second point(Rover check).
+
+
 If there are two rovers in the same place the execution is not stopped, we print that we have two rovers in the same position but only that, the notification.
